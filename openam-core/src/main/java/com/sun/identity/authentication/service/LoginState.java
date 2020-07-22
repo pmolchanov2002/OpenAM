@@ -1203,7 +1203,12 @@ public class LoginState {
                 }
             }
         }
-
+	    
+	// Fix for #297 Session Upgrade fails since user is different than original authenticated user
+	if(oldSession == null || oldUserDN == null) {
+		sessionUpgrade = false;
+	}    
+	   
         if (DEBUG.messageEnabled()) {
             DEBUG.message("LoginState.setSessionProperties()" +
                     " userDN is: " + userDN);
